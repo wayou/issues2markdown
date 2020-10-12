@@ -16,7 +16,7 @@ const r = promisify(writeFile);
 const REPO = "wayou.github.io";
 const OWNER = "wayou";
 
-const SIZE = 100
+const SIZE = 100;
 
 const octokit = new Octokit({
   auth: TOKEN,
@@ -27,13 +27,15 @@ async function write(issues: IIssue[]) {
     .filter((i) => !i.pull_request)
     .map((issue) => {
       const fileName = filenamify(
-        `${issue.created_at.split("T")[0]}-${issue.title}.md`,{
-          replacement:'-'
+        `${issue.created_at.split("T")[0]}-${issue.title}.md`,
+        {
+          replacement: "-",
         }
       );
       const date = moment(issue.created_at).format("YYYY-MM-DD HH:MM:SS +0800");
       const categories = issue.labels.map((l) => l.name).join(" ");
-      const title =issue.title.replace(/"/g,"\\\"");
+      // const title =issue.title.replace(/"/g,"\\\"");
+      const title = issue.title;
       const frontMatter = `---
 layout: post
 title: "${title}"

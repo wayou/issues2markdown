@@ -118,3 +118,4 @@ dist
 .jekyll-cache
 .DS_Store
 token.ts
+_posts/*.md
